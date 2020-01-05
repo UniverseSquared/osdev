@@ -17,7 +17,8 @@ void init_tty(void) {
 
 uint16_t tty_read_key(void) {
     tty_waiting_for_keypress = 1;
-    while(tty_waiting_for_keypress);
+    while(tty_waiting_for_keypress)
+        asm volatile("hlt");
 
     return tty_keypress;
 }

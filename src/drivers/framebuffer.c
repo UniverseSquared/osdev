@@ -26,6 +26,8 @@ void fb_write_char(char c) {
     if(c == '\n') {
         fb_x = 0;
         fb_y++;
+
+        fb_update_cursor();
     } else if(c == '\r') {
         fb_x = 0;
     } else {
@@ -50,8 +52,6 @@ void fb_write_char(char c) {
 
         fb_y--;
     }
-
-    fb_update_cursor();
 }
 
 void fb_write(const char *s) {

@@ -26,6 +26,8 @@ uint16_t tty_read_key(void) {
 size_t tty_read_line(char *buffer, size_t buffer_size) {
     size_t i = 0;
     while(i < buffer_size - 1) {
+        fb_update_cursor();
+
         uint16_t key = tty_read_key();
         char ascii = asciify_scancode(key);
 

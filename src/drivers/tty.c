@@ -22,3 +22,23 @@ uint16_t tty_read_key(void) {
 
     return tty_keypress;
 }
+
+size_t tty_read_line(char *buffer, size_t buffer_size) {
+    size_t i = 0;
+    while(i < buffer_size - 1) {
+        uint16_t key = tty_read_key();
+        char ascii = asciify_scancode(key);
+
+        if(key == ENTER_PRESSED) {
+            break;
+        } else if(ascii != 0) {
+            buffer[i++] = ascii;
+            fb_write_char(ascii);
+        }
+    }
+
+    fb_write_char('\n');
+
+    buffer[i++] = 0;
+    return i;
+}

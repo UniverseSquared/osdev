@@ -34,6 +34,11 @@ void fb_write_char(char c) {
         fb_x++;
     }
 
+    if(fb_x >= FB_WIDTH) {
+        fb_x = 0;
+        fb_y++;
+    }
+
     if(fb_y >= FB_HEIGHT) {
         memcpy(&framebuffer[0],
                &framebuffer[FB_POS(0, 1)],

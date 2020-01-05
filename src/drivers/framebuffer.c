@@ -19,7 +19,7 @@ void fb_clear(void) {
     fb_move_cursor(FB_POS(0, 0));
 
     for(size_t i = 0; i < FB_SIZE; i++)
-        fb_write_cell(i, ' ', FB_COLOR_BLACK, FB_COLOR_BLACK);
+        fb_write_cell(i, ' ', FB_COLOR_LIGHT_GRAY, FB_COLOR_BLACK);
 }
 
 void fb_write_char(char c) {
@@ -50,6 +50,8 @@ void fb_write_char(char c) {
 
         fb_y--;
     }
+
+    fb_update_cursor();
 }
 
 void fb_write(const char *s) {
@@ -62,4 +64,8 @@ void fb_move_cursor(uint16_t position) {
     port_write_byte(FB_DATA_PORT, (position >> 8) & 0xFF);
     port_write_byte(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
     port_write_byte(FB_DATA_PORT, position & 0xFF);
+}
+
+void fb_update_cursor(void) {
+    fb_move_cursor(FB_POS(fb_x, fb_y));
 }

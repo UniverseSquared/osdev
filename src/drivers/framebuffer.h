@@ -46,5 +46,6 @@ void fb_clear(void);
 void fb_write_char(char c);
 void fb_write(const char *s);
 void fb_move_cursor(uint16_t position);
+void fb_update_cursor(void);
 
 #endif

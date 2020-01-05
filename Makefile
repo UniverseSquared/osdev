@@ -31,16 +31,20 @@ LDFLAGS = -T linker.ld -m elf_i386 -g
 all: $(BIN)
 
 clean:
-	rm -f $(BIN) $(OBJS)
+	@rm -f $(BIN) $(OBJS)
+	@echo Cleaned
 
 qemu: $(BIN)
 	qemu-system-i386 -kernel $(BIN) -serial stdio
 
 $(BIN): $(OBJS)
-	$(LD) -o $@ $^ $(LDFLAGS)
+	@$(LD) -o $@ $^ $(LDFLAGS)
+	@echo LD $@
 
 %.o: %.s
-	$(AS) -o $@ $< $(ASFLAGS)
+	@$(AS) -o $@ $< $(ASFLAGS)
+	@echo AS $@
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+	@$(CC) -o $@ -c $< $(CFLAGS)
+	@echo CC $@

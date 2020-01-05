@@ -26,7 +26,7 @@ ASFLAGS = -felf32 -g
 LD = i686-elf-ld
 LDFLAGS = -T linker.ld -m elf_i386 -g
 
-.PHONY: all clean qemu
+.PHONY: all clean run debug
 
 all: $(BIN)
 
@@ -34,8 +34,11 @@ clean:
 	@rm -f $(BIN) $(OBJS)
 	@echo Cleaned
 
-qemu: $(BIN)
+run: $(BIN)
 	qemu-system-i386 -kernel $(BIN) -serial stdio
+
+debug: $(BIN)
+	gdb -x gdb-debug $(BIN)
 
 $(BIN): $(OBJS)
 	@$(LD) -o $@ $^ $(LDFLAGS)

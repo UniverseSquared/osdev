@@ -7,6 +7,7 @@
 #include <drivers/serial.h>
 #include <drivers/tty.h>
 #include <kernel/kprint.h>
+#include <lib/string.h>
 
 void kmain(void) {
     init_gdt();
@@ -21,6 +22,18 @@ void kmain(void) {
 
     kprintf(DEST_ALL, "hello, world!\n");
 
-    uint16_t key = tty_read_key();
-    kprintf(DEST_ALL, "read key: 0x%x\n", key);
+    char buffer[128] = { 0 };
+
+    while(1) {
+        fb_write("> ");
+        tty_read_line(buffer, sizeof(buffer));
+
+        if(strcmp(buffer, "hello") == 0) {
+            kprintf(DEST_FB, "hello!\n");
+        } else if(strcmp(buffer, "halt") == 0) {
+            kprintf(DEST_FB, "halting\n");
+            asm volatile(".halt: hlt\n"
+                         "       jmp .halt");
+        }
+    }
 }

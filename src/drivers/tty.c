@@ -33,6 +33,12 @@ size_t tty_read_line(char *buffer, size_t buffer_size) {
 
         if(key == ENTER_PRESSED) {
             break;
+        } else if(key == BACKSPACE_PRESSED && i > 0) {
+            buffer[--i] = 0;
+
+            fb_x--;
+            fb_write_cell(FB_POS(fb_x, fb_y), ' ',
+                          FB_COLOR_LIGHT_GRAY, FB_COLOR_BLACK);
         } else if(ascii != 0) {
             buffer[i++] = ascii;
             fb_write_char(ascii);

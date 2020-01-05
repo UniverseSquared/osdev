@@ -45,7 +45,9 @@ unsigned char asciify_scancode(uint8_t scancode) {
     }
 #pragma GCC diagnostic pop
 
-    if(scancode >= Q_PRESSED && scancode < A_PRESSED) {
+    if(scancode >= ONE_PRESSED && scancode < BACKSPACE_PRESSED) {
+        return "1234567890-="[scancode - ONE_PRESSED];
+    } else if(scancode >= Q_PRESSED && scancode < A_PRESSED) {
         return "qwertyuiop"[scancode - Q_PRESSED];
     } else if(scancode >= A_PRESSED && scancode < Z_PRESSED) {
         return "asdfghjkl"[scancode - A_PRESSED];

@@ -15,6 +15,21 @@ enum {
     keyname ## _PRESSED  = scancode,                \
     keyname ## _RELEASED = scancode + 0x80
 
+    DEF_KEY(ESCAPE,        0x01),
+    DEF_KEY(ONE,           0x02),
+    DEF_KEY(TWO,           0x03),
+    DEF_KEY(THREE,         0x04),
+    DEF_KEY(FOUR,          0x05),
+    DEF_KEY(FIVE,          0x06),
+    DEF_KEY(SIX,           0x07),
+    DEF_KEY(SEVEN,         0x08),
+    DEF_KEY(EIGHT,         0x09),
+    DEF_KEY(NINE,          0x0A),
+    DEF_KEY(ZERO,          0x0B),
+    DEF_KEY(HYPHEN,        0x0C),
+    DEF_KEY(EQUALS,        0x0D),
+    DEF_KEY(BACKSPACE,     0x0E),
+    DEF_KEY(TAB,           0x0F),
     DEF_KEY(Q,             0x10),
     DEF_KEY(W,             0x11),
     DEF_KEY(E,             0x12),

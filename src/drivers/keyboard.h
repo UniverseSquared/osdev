@@ -4,6 +4,8 @@
 #include <drivers/io.h>
 #include <kernel/kprint.h>
 
+#define KEYBOARD_MAX_KEY_HANDLERS 10
+
 #define KEYBOARD_DATA_PORT 0x60
 
 /* https://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html */

@@ -1,7 +1,7 @@
 #include <drivers/keyboard.h>
 
 static size_t keyboard_key_handler_count = 0;
-static keyboard_key_handler_t keyboard_key_handlers[] = { 0 };
+static keyboard_key_handler_t keyboard_key_handlers[KEYBOARD_MAX_KEY_HANDLERS] = { 0 };
 
 static uint8_t last_pressed_scancode = 0;
 
@@ -57,5 +57,7 @@ unsigned char asciify_scancode(uint8_t scancode) {
 }
 
 void add_keyboard_key_handler(keyboard_key_handler_t handler) {
-    keyboard_key_handlers[keyboard_key_handler_count++] = handler;
+    if(keyboard_key_handler_count < KEYBOARD_MAX_KEY_HANDLERS) {
+        keyboard_key_handlers[keyboard_key_handler_count++] = handler;
+    }
 }

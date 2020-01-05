@@ -26,6 +26,9 @@ void print_scancode_key_handler(uint16_t scancode) {
 }
 
 void kmain(void) {
+    serial_configure(SERIAL_COM1);
+    fb_clear();
+
     init_gdt();
     init_idt();
     init_pic();
@@ -34,9 +37,6 @@ void kmain(void) {
     init_tty();
 
     add_keyboard_key_handler(print_scancode_key_handler);
-
-    serial_configure(SERIAL_COM1);
-    fb_clear();
 
     kprintf(DEST_ALL, "hello, world!\n");
 

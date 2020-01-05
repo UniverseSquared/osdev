@@ -12,6 +12,7 @@ OBJS = \
 	src/drivers/pic.o \
 	src/drivers/pit.o \
 	src/drivers/keyboard.o \
+	src/drivers/tty.o \
 	src/kernel/kprint.o \
 	src/kernel/kpanic.o \
 	src/kernel/kmain.o \

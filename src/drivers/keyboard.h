@@ -12,7 +12,7 @@
 /* TODO: Many scancodes are omitted (see above ^), add them. */
 enum {
 #define DEF_KEY(keyname, scancode)              \
-    keyname ## _PRESSED  = scancode,                \
+    keyname ## _PRESSED  = scancode,            \
     keyname ## _RELEASED = scancode + 0x80
 
     DEF_KEY(ESCAPE,        0x01),

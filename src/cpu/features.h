@@ -9,12 +9,6 @@ enum {
     CPU_FEATURE_RDRND = BIT(30)
 };
 
-enum {
-    /* Used to specify which register the feature flag is set in. */
-    CPU_FEATURE_EDX = 0,
-    CPU_FEATURE_ECX = 1
-};
-
 uint32_t supported_cpu_features_ecx(void);
 uint32_t supported_cpu_features_edx(void);
 int is_cpu_feature_supported_ecx(uint32_t feature);

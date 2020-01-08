@@ -1,7 +1,6 @@
 OBJS = \
 	src/lib/string.o \
 	src/cpu/cpuid.o \
-	src/cpu/features.o \
 	src/cpu/rdrand.o \
 	src/drivers/io.o \
 	src/drivers/serial.o \

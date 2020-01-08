@@ -1,5 +1,7 @@
 OBJS = \
 	src/lib/string.o \
+	src/cpu/cpuid.o \
+	src/cpu/features.o \
 	src/drivers/io.o \
 	src/drivers/serial.o \
 	src/drivers/framebuffer.o \

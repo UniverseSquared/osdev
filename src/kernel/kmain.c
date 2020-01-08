@@ -1,3 +1,5 @@
+#include <cpu/cpuid.h>
+#include <cpu/features.h>
 #include <drivers/framebuffer.h>
 #include <drivers/gdt.h>
 #include <drivers/idt.h>
@@ -39,6 +41,18 @@ void kmain(void) {
     add_keyboard_key_handler(print_scancode_key_handler);
 
     kprintf(DEST_ALL, "hello, world!\n");
+
+    uint32_t eax;
+    char manufacturer_id[13] = { 0 };
+    cpuid(CPUID_LEAF_MANUFACTURER_ID, &eax,
+          &manufacturer_id[0], &manufacturer_id[8], &manufacturer_id[4]);
+
+    kprintf(DEST_ALL, "highest cpuid leaf supported: 0x%x\n", eax);
+    kprintf(DEST_ALL, "manufacturer id: %s\n", manufacturer_id);
+
+    int supports_rdrnd = is_cpu_feature_rdrnd_supported();
+    kprintf(DEST_ALL, "cpu supports rdrand: %s\n",
+            supports_rdrnd ? "yes" : "no");
 
     char buffer[128] = { 0 };
 

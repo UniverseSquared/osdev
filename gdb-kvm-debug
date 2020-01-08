@@ -1,0 +1,1 @@
+target remote | exec qemu-system-i386 -gdb stdio -kernel kernel.elf -enable-kvm -cpu host

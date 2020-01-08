@@ -1,5 +1,6 @@
 #include <cpu/cpuid.h>
 #include <cpu/features.h>
+#include <cpu/rdrand.h>
 #include <drivers/framebuffer.h>
 #include <drivers/gdt.h>
 #include <drivers/idt.h>
@@ -72,6 +73,12 @@ void kmain(void) {
 
             while(print_scancodes)
                 asm volatile("hlt");
+        } else if(strcmp(buffer, "random") == 0) {
+            if(supports_rdrnd) {
+                kprintf(DEST_ALL, "Result of RDRAND: %d\n", rdrand());
+            } else {
+                kprintf(DEST_ALL, "Your CPU doesn't support the RDRAND instruction!\n");
+            }
         }
     }
 }

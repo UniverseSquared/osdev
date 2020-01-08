@@ -19,6 +19,9 @@ kernel_stack_end:
         global boot
 boot:   mov esp, kernel_stack_end
 
+        push ebx                ; ebx contains a pointer to the multiboot info structure
+        push eax                ; eax contains the multiboot bootloader magic
+
         extern kmain
         call kmain
 

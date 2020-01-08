@@ -1,3 +1,4 @@
+#include <boot/multiboot.h>
 #include <cpu/cpuid.h>
 #include <cpu/features.h>
 #include <cpu/rdrand.h>
@@ -28,9 +29,13 @@ void print_scancode_key_handler(uint16_t scancode) {
     }
 }
 
-void kmain(void) {
+void kmain(uint32_t multiboot_magic, multiboot_info_t *multiboot_info) {
     serial_configure(SERIAL_COM1);
     fb_clear();
+
+    if(multiboot_magic != MULTIBOOT_BOOTLOADER_MAGIC) {
+        kpanic("This kernel was loaded by a non-multiboot-compliant bootloader (the magic number was incorrect)!");
+    }
 
     init_gdt();
     init_idt();

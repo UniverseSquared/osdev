@@ -9,6 +9,8 @@
 #define PIT_CHANNEL2_DATA_PORT 0x42
 #define PIT_COMMAND_PORT       0x43
 
-void init_pit(void);
+extern unsigned int pit_tick;
+
+void init_pit(unsigned int frequency);
 
 #endif

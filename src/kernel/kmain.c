@@ -1,6 +1,5 @@
 #include <boot/multiboot.h>
 #include <cpu/cpuid.h>
-#include <cpu/features.h>
 #include <cpu/rdrand.h>
 #include <drivers/framebuffer.h>
 #include <drivers/gdt.h>
@@ -12,6 +11,8 @@
 #include <drivers/tty.h>
 #include <kernel/kprint.h>
 #include <lib/string.h>
+
+#define PIT_FREQUENCY 100
 
 static int print_scancodes = 0;
 
@@ -40,7 +41,7 @@ void kmain(uint32_t multiboot_magic, multiboot_info_t *multiboot_info) {
     init_gdt();
     init_idt();
     init_pic();
-    init_pit();
+    init_pit(PIT_FREQUENCY);
     init_keyboard();
     init_tty();
 
@@ -84,6 +85,9 @@ void kmain(uint32_t multiboot_magic, multiboot_info_t *multiboot_info) {
             } else {
                 kprintf(DEST_ALL, "Your CPU doesn't support the RDRAND instruction!\n");
             }
+        } else if(streq(buffer, "pit")) {
+            kprintf(DEST_ALL, "frequency: %dHz\ncurrent tick: %d\n",
+                    PIT_FREQUENCY, pit_tick);
         }
     }
 }

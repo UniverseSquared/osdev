@@ -8,13 +8,18 @@ size_t strlen(const char *s) {
     return size;
 }
 
-int strcmp(const char *s1, const char *s2) {
-    size_t length = strlen(s1);
-    for(size_t i = 0; i < length; i++)
-        if(s1[i] != s2[i] || s1[i] == 0 || s2[i] == 0)
-            return (int)(s1[i]) - (int)(s2[i]);
+int streq(const char *x, const char *y) {
+    size_t x_length = strlen(x);
+    size_t y_length = strlen(y);
 
-    return 0;
+    if(x_length != y_length)
+        return 0;
+
+    for(size_t i = 0; i < x_length; i++)
+        if(x[i] != y[i])
+            return 0;
+
+    return 1;
 }
 
 void *memcpy(void *dest, const void *src, size_t n) {

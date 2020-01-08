@@ -66,19 +66,19 @@ void kmain(uint32_t multiboot_magic, multiboot_info_t *multiboot_info) {
         fb_write("> ");
         tty_read_line(buffer, sizeof(buffer));
 
-        if(strcmp(buffer, "hello") == 0) {
+        if(streq(buffer, "hello")) {
             kprintf(DEST_FB, "hello!\n");
-        } else if(strcmp(buffer, "halt") == 0) {
+        } else if(streq(buffer, "halt")) {
             kprintf(DEST_FB, "halting\n");
             asm volatile(".halt: hlt\n"
                          "       jmp .halt");
-        } else if(strcmp(buffer, "scancode") == 0) {
+        } else if(streq(buffer, "scancode")) {
             kprintf(DEST_FB, "Press Q to exit\n");
             print_scancodes = 1;
 
             while(print_scancodes)
                 asm volatile("hlt");
-        } else if(strcmp(buffer, "random") == 0) {
+        } else if(streq(buffer, "random")) {
             if(supports_rdrnd) {
                 kprintf(DEST_ALL, "Result of RDRAND: %d\n", rdrand());
             } else {

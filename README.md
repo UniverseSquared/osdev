@@ -15,4 +15,4 @@ $ make
 
 The built `kernel.elf` can then be booted using a multiboot-compliant bootloader
 such as [GRUB](https://www.gnu.org/software/grub/), or under QEMU using the
-command `make run` or `make-kvm` to enable KVM and use your host CPU for the VM.
+command `make run` or `make run-kvm` to enable KVM and use your host CPU for the VM.

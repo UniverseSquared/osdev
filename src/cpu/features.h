@@ -15,9 +15,12 @@ enum {
     CPU_FEATURE_ECX = 1
 };
 
-int is_cpu_feature_supported(uint32_t feature, int reg);
+uint32_t supported_cpu_features_ecx(void);
+uint32_t supported_cpu_features_edx(void);
+int is_cpu_feature_supported_ecx(uint32_t feature);
+int is_cpu_feature_supported_edx(uint32_t feature);
 
-/* Convenience wrappers around is_cpu_feature_supported. */
+/* Convenience wrappers around is_cpu_feature_supported_*. */
 int is_cpu_feature_rdrnd_supported(void);
 
 #endif
